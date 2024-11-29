@@ -254,7 +254,7 @@ def sort_features(corr_matrix):
 sorted_features = sort_features(corr_matrix)
 
 print("Features sorted by their absolute correlation with Diabetes (including sign):")
-print(type(sorted_features))  # Doit afficher "<class 'list'>"
+print((sorted_features))  # Doit afficher "<class 'list'>"
 
 
 # Optional: Visualize the correlations
@@ -493,8 +493,8 @@ best_threshold = 0.5
 best_recall = 0
 best_f1 = 0
 
-
-thresholds = [i / 10 for i in range(1, 10)]  # De 0.1 à 0.9
+thresholds = [i / 100 for i in range(20, 31, 1)] 
+#thresholds = [i / 10 for i in range(1, 10)]  # De 0.1 à 0.9
 num_features_list = range(1, len(sorted_features) + 1)
 
 models = {
@@ -614,7 +614,7 @@ def validation(regressor, X_test, y_test):
     return (recall(y_test, y_pred), precision(y_test, y_pred), f1_score(y_test, y_pred))
 
 
-threshold = 0.5 # we can adapt the value
+threshold = 0.24   # we can adapt the value # 0.22 or 0.23
 
 result = {
     "linear": {},
@@ -628,7 +628,7 @@ for i in range(1, len(sorted_features) + 1):
     selected_features = sorted_features[:i]
     X_selected = X[selected_features]
     
-    #set to get the measures for the validation
+    #set to get the measures for the validationthresholds = [i / 100 for i in range(20, 31, 1)] 
     reg_validation = {
         "linear": [],
         "logistic": [],
@@ -715,17 +715,10 @@ plot_result(result, threshold, to_show = "f1_score")
 # The **clarity**, **content** and **description** (in the report) of your figure will be evaluated.
 
 # %%
-"""
-CELL N°6.1 : VISUALIZE YOUR RESULTS
-
-@pre:  /
-@post: A figure showing the Recall and F1 Score of the Logistic Regressor at different thresholds.
-"""
 
 
-
-
-thresholds = [i / 10 for i in range(1, 10)]  # Thresholds from 0.1 to 0.9
+thresholds = [i / 100 for i in range(20, 31, 1)] 
+#thresholds = [i / 10 for i in range(1, 10)]  # Thresholds from 0.1 to 0.9
 recalls = []
 f1_scores = []
 
@@ -771,6 +764,5 @@ plt.xticks(thresholds)
 plt.legend()
 plt.grid(True)
 plt.show()
-
 
 
